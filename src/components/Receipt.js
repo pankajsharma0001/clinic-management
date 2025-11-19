@@ -71,7 +71,11 @@ export default function Receipt({ receiptData = {}, onPrint }) {
         <header className="print-header py-1 px-3 border-b border-gray-300">
           <div className="flex items-center justify-between gap-2">
             {/* Logo on left */}
-            <div className="w-12 h-12 bg-blue-500 text-white flex items-center justify-center rounded-md font-bold text-xs shrink-0">LOGO</div>
+            <img 
+              src="/logo.png" 
+              alt="Clinic Logo" 
+              className="w-16 h-16 object-contain rounded-md"
+            />
             
             {/* Title in center */}
             <div className="text-center grow">
@@ -81,7 +85,7 @@ export default function Receipt({ receiptData = {}, onPrint }) {
             
             {/* Phone and PAN on right */}
             <div className="text-right text-xs text-gray-600 shrink-0">
-              <div className="text-gray-500 font-semibold text-xs">Phone: +977-987654321</div>
+              <div className="text-gray-500 font-semibold text-xs">Phone: 987654321</div>
               <div className="text-gray-500 font-semibold text-xs">PAN: 987654321</div>
             </div>
           </div>

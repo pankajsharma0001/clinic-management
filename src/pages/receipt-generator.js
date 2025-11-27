@@ -19,7 +19,6 @@ export default function ReceiptGenerator() {
 
   useEffect(() => {
     fetchMedicines();
-    generateInvoiceNumber();
   }, []);
 
   const fetchMedicines = async () => {
@@ -32,10 +31,14 @@ export default function ReceiptGenerator() {
     }
   };
 
-  const generateInvoiceNumber = () => {
-    const randomNum = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
-    const invoiceNo = `CS${Math.floor(Math.random() * 100000).toString().padStart(5, '0')}-${randomNum}`;
-    setReceiptData(prev => ({ ...prev, invoiceNo }));
+  const generateInvoiceNumber = async () => {
+    try {
+      const res = await fetch('/api/invoice-number');
+      const data = await res.json();
+      setReceiptData(prev => ({ ...prev, invoiceNo: data.invoiceNo }));
+    } catch (error) {
+      console.error('Error generating invoice number:', error);
+    }
   };
 
   const filteredMedicines = medicines.filter(medicine =>
@@ -75,6 +78,7 @@ export default function ReceiptGenerator() {
   };
 
   const generateReceipt = () => {
+    generateInvoiceNumber();
     const receipt = {
       invoiceNo: receiptData.invoiceNo,
       doctor: patientData.doctor,
@@ -85,7 +89,6 @@ export default function ReceiptGenerator() {
       items: selectedItems
     };
     setReceiptData(receipt);
-    alert('Receipt generated successfully! Scroll down to view and print.');
   };
 
   const handlePrint = () => {
@@ -110,9 +113,7 @@ export default function ReceiptGenerator() {
           }),
         });
       }
-      
-      alert('✅ Receipt saved successfully! Stock updated.');
-      
+            
       // Reset form
       setSelectedItems([]);
       setPatientData({
@@ -121,7 +122,7 @@ export default function ReceiptGenerator() {
         address: '',
         hospitalNo: ''
       });
-      generateInvoiceNumber();
+      // generateInvoiceNumber();
       setReceiptData({});
       
     } catch (error) {

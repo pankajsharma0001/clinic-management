@@ -32,7 +32,8 @@ const numberToWords = (num) => {
 
 export default function Receipt({ receiptData = {}, onPrint }) {
   const [currentDate, setCurrentDate] = useState('');
-  const [discountAmount, setDiscountAmount] = useState(0);
+  const [discountInput, setDiscountInput] = useState("");  // ✅ This was missing
+  const [vatEnabled, setVatEnabled] = useState(false);      // VAT checkbox
 
   useEffect(() => {
     const now = new Date();
@@ -46,9 +47,21 @@ export default function Receipt({ receiptData = {}, onPrint }) {
 
   const items = receiptData.items || [];
   const totalAmount = calculateTotal(items);
-  const discount = parseFloat(discountAmount) || 0;
+
+  // DISCOUNT LOGIC (supports % and amount)
+  let discount = 0;
+  if (discountInput.includes('%')) {
+    const percent = parseFloat(discountInput.replace('%', '')) || 0;
+    discount = (totalAmount * percent) / 100;
+  } else {
+    discount = parseFloat(discountInput) || 0;
+  }
+
   const taxableAmount = Math.max(0, totalAmount - discount);
-  const vat = taxableAmount * 0.13;
+
+  // VAT only if checkbox is checked
+  const vat = vatEnabled ? taxableAmount * 0.13 : 0;
+
   const finalTotal = taxableAmount + vat;
   const totalInWords = numberToWords(Math.floor(finalTotal));
 
@@ -161,7 +174,7 @@ export default function Receipt({ receiptData = {}, onPrint }) {
               {/* Service rows */}
               {items && items.length > 0 ? (
                 items.map((item, index) => (
-                  <tr key={index} className="text-gray-700 text-xs border-b border-gray-300 page-break-inside-avoid">
+                  <tr key={index} className="text-gray-700 text-xs border-b border-gray-300">
                     <td className="p-1 border border-gray-300 text-center text-gray-700">{index + 1}</td>
                     <td className="p-1 border border-gray-300 text-center text-gray-700">{item.hsCode || ''}</td>
                     <td className="p-1 border border-gray-300 text-gray-700">{item.name}</td>
@@ -172,7 +185,7 @@ export default function Receipt({ receiptData = {}, onPrint }) {
                   </tr>
                 ))
               ) : (
-                <tr className="text-gray-700 text-xs border-b border-gray-300 page-break-inside-avoid">
+                <tr className="text-gray-700 text-xs border-b border-gray-300">
                   <td className="p-1 border border-gray-300 text-center">1</td>
                   <td className="p-1 border border-gray-300 text-center"></td>
                   <td className="p-1 border border-gray-300">E.C.G.</td>
@@ -189,20 +202,48 @@ export default function Receipt({ receiptData = {}, onPrint }) {
                   <div className="grid grid-cols-2 gap-2 float-right w-1/2">
                     <div className="text-right text-xs font-semibold text-gray-700">Total Amount:</div>
                     <div className="text-right text-xs text-gray-800 whitespace-nowrap">Rs. {totalAmount.toFixed(2)}</div>
-                    <div className="text-right text-xs font-semibold text-gray-700">Discount:</div>
-                    <div className="text-right text-xs text-gray-800 whitespace-nowrap">
+
+                    {/* DISCOUNT INPUT */}
+                    <div className="text-right font-semibold text-gray-700 text-xs">
+                      Discount:
+                      <br />
+                    </div>
+                    <div className="text-right ">
                       <input
-                        type="number"
-                        value={discountAmount}
-                        onChange={(e) => setDiscountAmount(e.target.value)}
-                        placeholder="0"
-                        className="w-16 p-0.5 border border-gray-300 rounded text-right text-xs no-print text-gray-700"
+                        type="text"
+                        value={
+                          discountInput.includes("%")
+                            ? discountInput
+                            : discountInput
+                            ? `Rs. ${discountInput}`
+                            : ""
+                        }
+                        onChange={(e) => {
+                          let value = e.target.value.replace("Rs.", "").trim();
+                          setDiscountInput(value);
+                        }}
+                        placeholder="Rs.0"
+                        className="discount-input w-20 p-0.5 border border-gray-500 rounded text-right text-xs text-gray-700"
                       />
                     </div>
+                    
                     <div className="text-right text-xs font-semibold text-gray-700">Taxable Amount:</div>
                     <div className="text-right text-xs text-gray-800 whitespace-nowrap">Rs. {taxableAmount.toFixed(2)}</div>
-                    <div className="text-right text-xs font-semibold text-gray-700">13% VAT:</div>
-                    <div className="text-right text-xs text-gray-800 whitespace-nowrap">Rs. {vat.toFixed(2)}</div>
+
+                    {/* VAT CHECKBOX */}
+                    <div className="text-right font-semibold text-gray-700 text-xs">
+                      <label className="cursor-pointer select-none">
+                        <input 
+                          type="checkbox" 
+                          checked={vatEnabled} 
+                          onChange={(e) => setVatEnabled(!vatEnabled)}
+                          className="vat-checkbox mr-1"
+                        />
+                        13% VAT:
+                      </label>
+                    </div>
+                    <div className="text-right text-xs">Rs. {vat.toFixed(2)}</div>
+
                     <div className="text-right text-xs font-bold text-gray-800 bg-yellow-100 p-0.5">TOTAL:</div>
                     <div className="text-right text-xs font-bold text-green-600 bg-yellow-100 p-0.5 whitespace-nowrap">Rs. {finalTotal.toFixed(2)}</div>
                   </div>
@@ -220,7 +261,7 @@ export default function Receipt({ receiptData = {}, onPrint }) {
 
               {/* Spacer before signature */}
               <tr className="page-break-inside-avoid">
-                <td colSpan={7} className="h-20"></td>
+                <td colSpan={7} className="h-10"></td>
               </tr>
 
               {/* Signature rows */}
@@ -315,7 +356,7 @@ export default function Receipt({ receiptData = {}, onPrint }) {
 
           /* Page setup */
           @page {
-            margin: 0.5in 0.5in 0.5in 0.5in;
+            margin: 0.2in 0.2in 0.5in 0.5in;
             size: auto;
           }
 
@@ -367,7 +408,7 @@ export default function Receipt({ receiptData = {}, onPrint }) {
 
           /* Make header and footer repeat on each page */
           .print-header {
-            position: running(header);
+            position: static;
           }
 
           .receipt-table thead {
@@ -398,7 +439,7 @@ export default function Receipt({ receiptData = {}, onPrint }) {
 
           /* Ensure proper page breaks in table */
           .receipt-table tr {
-            page-break-inside: avoid;
+            page-break-inside: auto;
           }
 
           /* Allow the table to break naturally */
@@ -406,7 +447,7 @@ export default function Receipt({ receiptData = {}, onPrint }) {
             page-break-inside: auto;
           }
 
-          /* Force a page break before signature section if needed */
+          // /* Force a page break before signature section if needed */
           .receipt-table tbody tr:last-child {
             page-break-before: avoid;
           }

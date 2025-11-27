@@ -21,7 +21,6 @@ export default function LabReceiptGenerator() {
 
   useEffect(() => {
     fetchTests();
-    generateInvoiceNumber();
   }, []);
 
   const fetchTests = async () => {
@@ -35,13 +34,14 @@ export default function LabReceiptGenerator() {
     }
   };
 
-  const generateInvoiceNumber = () => {
-    const randomNum = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
-    const invoiceNo = `LT${Math.floor(Math.random() * 10000)
-      .toString()
-      .padStart(4, '0')}-${randomNum}`;
-
-    setReceiptData(prev => ({ ...prev, invoiceNo }));
+  const generateInvoiceNumber = async () => {
+    try {
+      const res = await fetch('/api/lab-invoice-number');
+      const data = await res.json();
+      setReceiptData(prev => ({ ...prev, invoiceNo: data.invoiceNo }));
+    } catch (error) {
+      console.error('Error generating invoice number:', error);
+    }
   };
 
   const filteredTests = tests.filter(test =>
@@ -63,6 +63,7 @@ export default function LabReceiptGenerator() {
   };
 
   const generateReceipt = () => {
+    generateInvoiceNumber();
     const receipt = {
       invoiceNo: receiptData.invoiceNo,
       doctor: patientData.doctor,
@@ -74,7 +75,6 @@ export default function LabReceiptGenerator() {
     };
 
     setReceiptData(receipt);
-    alert("Lab test receipt generated!");
   };
 
   const handlePrint = () => {
@@ -89,7 +89,6 @@ export default function LabReceiptGenerator() {
         body: JSON.stringify(receiptData),
       });
 
-      alert("Lab Receipt saved!");
 
       setSelectedItems([]);
       setPatientData({

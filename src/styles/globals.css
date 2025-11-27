@@ -20,6 +20,11 @@
 }
 
 @media print {
+  @page {
+    size: auto;
+    margin: 0.2in; /* small margin all around */
+  }
+
   body * {
     visibility: hidden;
   }
@@ -30,18 +35,49 @@
   }
   
   .receipt-container {
-    position: absolute;
-    left: 0;
-    top: 0;
+    position: relative;
+    left: auto;
+    top: auto;
     width: 100%;
     margin: 0;
     padding: 0;
+    padding-bottom: 0;
     border: none !important;
     box-shadow: none !important;
+    background: white !important;
   }
   
   .no-print {
     display: none !important;
+  }
+
+  .receipt-container input,
+  .receipt-container input[type="checkbox"] {
+    visibility: visible !important;
+    display: inline-block !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* HIDE VAT CHECKBOX COMPLETELY */
+  input[type="checkbox"].vat-checkbox,
+  .vat-checkbox {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .discount-input {
+    border: none !important;
+    background: transparent !important;
+    visibility: visible !important;
+    display: inline !important;
+    color: black !important;
   }
 }
 

@@ -8,81 +8,91 @@ export default function AddSampleData() {
 
   const addSampleMedicines = async () => {
     const sampleMedicines = [
-      { name: "RFT/KFT", itemCode: "RFT", rate: 850, quantity: 50, category: "Test" },
-      { name: "CBC", itemCode: "CBC", rate: 500, quantity: 50, category: "Test" },
-      { name: "UREA", itemCode: "UREA", rate: 200, quantity: 50, category: "Test" },
-      { name: "HB", itemCode: "HB", rate: 100, quantity: 50, category: "Test" },
-      { name: "CREATNINE", itemCode: "CREAT", rate: 200, quantity: 50, category: "Test" },
-      { name: "TC", itemCode: "TC", rate: 100, quantity: 50, category: "Test" },
-      { name: "NA%K (Sodium & Potassium)", itemCode: "NAK", rate: 350, quantity: 50, category: "Test" },
-      { name: "LFT", itemCode: "LFT", rate: 850, quantity: 50, category: "Test" },
-      { name: "ESR", itemCode: "ESR", rate: 100, quantity: 50, category: "Test" },
-      { name: "BILIRUBIN (T & D)", itemCode: "BILI", rate: 250, quantity: 50, category: "Test" },
-      { name: "BLOOD GROUP", itemCode: "BGRP", rate: 100, quantity: 50, category: "Test" },
-      { name: "SGPT", itemCode: "SGPT", rate: 250, quantity: 50, category: "Test" },
-      { name: "PT (INR)", itemCode: "PTINR", rate: 400, quantity: 50, category: "Test" },
-      { name: "SGOT", itemCode: "SGOT", rate: 250, quantity: 50, category: "Test" },
-      { name: "APTT", itemCode: "APTT", rate: 600, quantity: 50, category: "Test" },
-      { name: "ALKALINE PHOSPHATE (ALP)", itemCode: "ALP", rate: 250, quantity: 50, category: "Test" },
-      { name: "MALARIA PARASITE", itemCode: "MP", rate: 200, quantity: 50, category: "Test" },
-      { name: "LIPID PROFILE", itemCode: "LIPID", rate: 800, quantity: 50, category: "Test" },
-      { name: "MALARIA ANTIGEN", itemCode: "MALG", rate: 500, quantity: 50, category: "Test" },
-      { name: "TOTAL CHOLESTROL", itemCode: "TCHOL", rate: 250, quantity: 50, category: "Test" },
-      { name: "HBA1C", itemCode: "HBA1C", rate: 1000, quantity: 50, category: "Test" },
-      { name: "PAP SMEAR", itemCode: "PAP", rate: 1100, quantity: 50, category: "Test" },
-      { name: "UPT", itemCode: "UPT", rate: 100, quantity: 50, category: "Test" },
-      { name: "SERUM BETA-HCG", itemCode: "HCG", rate: 1500, quantity: 50, category: "Test" },
-      { name: "URINE R/E", itemCode: "URE", rate: 100, quantity: 50, category: "Test" },
-      { name: "URINE ACETONE & KETONE", itemCode: "UAK", rate: 200, quantity: 50, category: "Test" },
-      { name: "SUGAR F, PP, RANDOM (EACH)", itemCode: "SUGAR", rate: 50, quantity: 50, category: "Test" },
-      { name: "URINE ACR", itemCode: "ACR", rate: 1200, quantity: 50, category: "Test" },
-      { name: "SERUM CALCIUM", itemCode: "CAL", rate: 500, quantity: 50, category: "Test" },
-      { name: "URINE C/S", itemCode: "URCS", rate: 500, quantity: 50, category: "Test" },
-      { name: "SERUM PHOSPHROUS", itemCode: "PHOS", rate: 500, quantity: 50, category: "Test" },
-      { name: "BLOOD C/S", itemCode: "BLCS", rate: 500, quantity: 50, category: "Test" },
-      { name: "STOOL C/S", itemCode: "STCS", rate: 500, quantity: 50, category: "Test" },
-      { name: "ANA TITRE", itemCode: "ANA", rate: 1500, quantity: 50, category: "Test" },
-      { name: "SPUTUM C/S", itemCode: "SPCS", rate: 500, quantity: 50, category: "Test" },
-      { name: "H. PYLORI(BLOOD)", itemCode: "HPBL", rate: 1000, quantity: 50, category: "Test" },
-      { name: "H. PYLORI (AG) STOOL", itemCode: "HPAG", rate: 1200, quantity: 50, category: "Test" },
-      { name: "SPUTUM AFB (EACH)", itemCode: "AFB", rate: 600, quantity: 50, category: "Test" },
-      { name: "URIC ACID", itemCode: "URIC", rate: 250, quantity: 50, category: "Test" },
-      { name: "STOOL R/E", itemCode: "STRE", rate: 100, quantity: 50, category: "Test" },
-      { name: "RA FACTOR", itemCode: "RA", rate: 500, quantity: 50, category: "Test" },
-      { name: "STOOL OCCULT BLOOD (OBT)", itemCode: "OBT", rate: 250, quantity: 50, category: "Test" },
-      { name: "CRP TITRE", itemCode: "CRP", rate: 400, quantity: 50, category: "Test" },
-      { name: "SEMEN ANALYSIS", itemCode: "SEMN", rate: 500, quantity: 50, category: "Test" },
-      { name: "ASO TITRE", itemCode: "ASO", rate: 500, quantity: 50, category: "Test" },
-      { name: "IRON PROFILE", itemCode: "IRONP", rate: 2500, quantity: 50, category: "Test" },
-      { name: "SERUM ALBUMIN", itemCode: "ALB", rate: 300, quantity: 50, category: "Test" },
-      { name: "SERUM FERRITIN", itemCode: "FERR", rate: 1400, quantity: 50, category: "Test" },
-      { name: "TOTAL PROTEIN", itemCode: "TPRT", rate: 400, quantity: 50, category: "Test" },
-      { name: "SERUM IRON", itemCode: "IRON", rate: 500, quantity: 50, category: "Test" },
-      { name: "VDRL", itemCode: "VDRL", rate: 350, quantity: 50, category: "Test" },
-      { name: "HIV I & II", itemCode: "HIV", rate: 500, quantity: 50, category: "Test" },
-      { name: "HBSAG", itemCode: "HBS", rate: 400, quantity: 50, category: "Test" },
-      { name: "ANTI-HCV", itemCode: "HCV", rate: 700, quantity: 50, category: "Test" },
-      { name: "TPHA", itemCode: "TPHA", rate: 600, quantity: 50, category: "Test" },
-      { name: "WIDAL", itemCode: "WIDAL", rate: 250, quantity: 50, category: "Test" },
-      { name: "DENGUE (AG & AB)", itemCode: "DEN", rate: 1200, quantity: 50, category: "Test" },
-      { name: "SERUM AMYLASE", itemCode: "AMY", rate: 600, quantity: 50, category: "Test" },
-      { name: "TFT (T3, T4, TSH)", itemCode: "TFT", rate: 1000, quantity: 50, category: "Test" },
-      { name: "T3", itemCode: "T3", rate: 400, quantity: 50, category: "Test" },
-      { name: "T4", itemCode: "T4", rate: 400, quantity: 50, category: "Test" },
-      { name: "TSH", itemCode: "TSH", rate: 500, quantity: 50, category: "Test" },
-      { name: "VITAMIN D (25-OH)", itemCode: "VITD", rate: 2400, quantity: 50, category: "Test" },
-      { name: "VITAMIN B12", itemCode: "VITB12", rate: 2000, quantity: 50, category: "Test" },
-      { name: "ANTI TPO", itemCode: "ATPO", rate: 1600, quantity: 50, category: "Test" },
-      { name: "OGTT (3 times)", itemCode: "OGTT", rate: 300, quantity: 50, category: "Test" },
-      { name: "PSA", itemCode: "PSA", rate: 1500, quantity: 50, category: "Test" },
-      { name: "URINE MICROALBUMIN", itemCode: "UMALB", rate: 900, quantity: 50, category: "Test" },
-      { name: "SERUM PROLACTIN", itemCode: "PROL", rate: 1400, quantity: 50, category: "Test" },
-      { name: "CPK TOTAL", itemCode: "CPKT", rate: 1000, quantity: 50, category: "Test" },
-      { name: "CPK-MB", itemCode: "CPKMB", rate: 1200, quantity: 50, category: "Test" },
-      { name: "SERUM LDH", itemCode: "LDH", rate: 800, quantity: 50, category: "Test" },
-      { name: "GAMMA - GGT", itemCode: "GGT", rate: 700, quantity: 50, category: "Test" },
-      { name: "MAGNESIUM", itemCode: "MG", rate: 500, quantity: 50, category: "Test" },
-      { name: "SERUM A/G RATIO", itemCode: "AGRATIO", rate: 500, quantity: 50, category: "Test" },
+
+      // ============================
+      // 📌 TABLETS
+      // ============================
+      { name: "Paracetamol 500mg", itemCode: "PCM500", rate: 20, quantity: 300, category: "Tablet" },
+      { name: "Cetirizine 10mg", itemCode: "CET10", rate: 15, quantity: 250, category: "Tablet" },
+      { name: "Azithromycin 500mg", itemCode: "AZI500", rate: 120, quantity: 150, category: "Tablet" },
+      { name: "Amoxicillin 500mg", itemCode: "AMOX500", rate: 80, quantity: 180, category: "Tablet" },
+      { name: "Montelukast 10mg", itemCode: "MON10", rate: 45, quantity: 200, category: "Tablet" },
+      { name: "Losartan 50mg", itemCode: "LOS50", rate: 35, quantity: 170, category: "Tablet" },
+      { name: "Atorvastatin 10mg", itemCode: "ATOR10", rate: 50, quantity: 140, category: "Tablet" },
+      { name: "Metformin 500mg", itemCode: "MET500", rate: 35, quantity: 160, category: "Tablet" },
+      { name: "Ibuprofen 400mg", itemCode: "IBU400", rate: 25, quantity: 180, category: "Tablet" },
+      { name: "Ranitidine 150mg", itemCode: "RAN150", rate: 12, quantity: 200, category: "Tablet" },
+      { name: "Telmisartan 40mg", itemCode: "TEL40", rate: 40, quantity: 180, category: "Tablet" },
+      { name: "Diclofenac 50mg", itemCode: "DICLO50", rate: 15, quantity: 250, category: "Tablet" },
+      { name: "Fexofenadine 120mg", itemCode: "FEX120", rate: 55, quantity: 160, category: "Tablet" },
+      { name: "Levocetirizine 5mg", itemCode: "LEVC5", rate: 18, quantity: 200, category: "Tablet" },
+      { name: "Dexamethasone 4mg", itemCode: "DEX4", rate: 12, quantity: 140, category: "Tablet" },
+    
+      // ============================
+      // 📌 CAPSULES
+      // ============================
+      { name: "Amoxiclav 625mg", itemCode: "AMOCLAV", rate: 150, quantity: 100, category: "Capsule" },
+      { name: "Doxycycline 100mg", itemCode: "DOXY100", rate: 40, quantity: 120, category: "Capsule" },
+      { name: "Omeprazole 20mg", itemCode: "OME20", rate: 25, quantity: 200, category: "Capsule" },
+      { name: "Pantoprazole 40mg", itemCode: "PANTO40", rate: 30, quantity: 175, category: "Capsule" },
+      { name: "Rabeprazole 20mg", itemCode: "RABE20", rate: 30, quantity: 150, category: "Capsule" },
+      { name: "Cabergoline 0.25mg", itemCode: "CAB25", rate: 180, quantity: 60, category: "Capsule" },
+    
+      // ============================
+      // 📌 SYRUPS
+      // ============================
+      { name: "Cough Syrup 100ml", itemCode: "CS100", rate: 80, quantity: 120, category: "Syrup" },
+      { name: "Paracetamol Syrup 60ml", itemCode: "PCS60", rate: 40, quantity: 150, category: "Syrup" },
+      { name: "B-Complex Syrup", itemCode: "BCS100", rate: 85, quantity: 90, category: "Syrup" },
+      { name: "ORS Liquid 200ml", itemCode: "ORSLIQ", rate: 30, quantity: 100, category: "Syrup" },
+      { name: "Iron Syrup 100ml", itemCode: "IRS100", rate: 60, quantity: 80, category: "Syrup" },
+      { name: "Calcium Syrup 200ml", itemCode: "CAL200", rate: 90, quantity: 70, category: "Syrup" },
+    
+      // ============================
+      // 📌 INJECTIONS
+      // ============================
+      { name: "Ceftriaxone Injection 1g", itemCode: "CEF1G", rate: 120, quantity: 60, category: "Injection" },
+      { name: "Dexamethasone Injection 2ml", itemCode: "DEX2", rate: 20, quantity: 100, category: "Injection" },
+      { name: "Ondansetron Injection", itemCode: "ONDINJ", rate: 25, quantity: 80, category: "Injection" },
+      { name: "Pantoprazole Injection", itemCode: "PANTOINJ", rate: 50, quantity: 70, category: "Injection" },
+      { name: "Vitamin B-Complex Injection", itemCode: "BCINJ", rate: 40, quantity: 90, category: "Injection" },
+    
+      // ============================
+      // 📌 DROPS
+      // ============================
+      { name: "Eye Drops Ciprofloxacin", itemCode: "ECPD", rate: 60, quantity: 90, category: "Drops" },
+      { name: "Ear Drops Sofradex", itemCode: "ESF", rate: 45, quantity: 80, category: "Drops" },
+      { name: "Nasal Drops Saline", itemCode: "NSD", rate: 25, quantity: 150, category: "Drops" },
+    
+      // ============================
+      // 📌 OINTMENTS / CREAMS
+      // ============================
+      { name: "Burnol Ointment", itemCode: "BURNOL", rate: 35, quantity: 60, category: "Ointment" },
+      { name: "Betnovate Cream", itemCode: "BETNO", rate: 40, quantity: 50, category: "Ointment" },
+      { name: "Clotrimazole Cream", itemCode: "CLOT", rate: 25, quantity: 100, category: "Ointment" },
+      { name: "Hydrocortisone Cream", itemCode: "HYDROC", rate: 30, quantity: 80, category: "Ointment" },
+    
+      // ============================
+      // 📌 SUPPLEMENTS / VITAMINS
+      // ============================
+      { name: "Vitamin C 500mg", itemCode: "VITC500", rate: 25, quantity: 200, category: "Supplement" },
+      { name: "Vitamin D3 60k", itemCode: "VITD3", rate: 120, quantity: 150, category: "Supplement" },
+      { name: "Calcium + Vitamin D3", itemCode: "CALD3", rate: 80, quantity: 200, category: "Supplement" },
+      { name: "Zinc Tablets 20mg", itemCode: "ZINC20", rate: 18, quantity: 250, category: "Supplement" },
+      { name: "Multivitamin Capsule", itemCode: "MVT", rate: 60, quantity: 180, category: "Supplement" },
+    
+      // ============================
+      // 📌 OTC / GENERAL
+      // ============================
+      { name: "ORS Packet", itemCode: "ORS", rate: 20, quantity: 300, category: "OTC" },
+      { name: "Bandage Roll", itemCode: "BANDAGE", rate: 15, quantity: 200, category: "OTC" },
+      { name: "Cotton 50g", itemCode: "COT50", rate: 25, quantity: 150, category: "OTC" },
+      { name: "Dettol 100ml", itemCode: "DETTOL100", rate: 40, quantity: 100, category: "OTC" },
+      { name: "Hand Sanitizer 100ml", itemCode: "SAN100", rate: 50, quantity: 120, category: "OTC" },
+      { name: "Thermometer Digital", itemCode: "THERMO", rate: 250, quantity: 40, category: "OTC" },
+      { name: "Gauze Pack", itemCode: "GAUZE", rate: 10, quantity: 250, category: "OTC" },
+      { name: "Pain Relief Spray", itemCode: "PAINSPR", rate: 130, quantity: 90, category: "OTC" },
+    
     ];
 
     for (const m of sampleMedicines) {
@@ -93,12 +103,12 @@ export default function AddSampleData() {
       });
     }
 
-    alert('All tests added successfully!');
+    alert('All medicines added successfully!');
   };
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold">Sample Data Adding…</h1>
+      <h1 className="text-2xl font-bold">Adding Sample Medicines…</h1>
       <p>Check MongoDB after it completes.</p>
     </div>
   );
